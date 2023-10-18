@@ -19,6 +19,6 @@ from django.urls import path
 from mysite import views as mv#
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',mv.homepage,name="homepage" ),
+    path('',mv.homepage,name="homepage" ), #呼叫homepage
     path('post/<slug:slug>/',mv.showpost,name="showpost"),
-]
+]              #<>會變成變數傳給slug

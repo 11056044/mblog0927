@@ -2,15 +2,24 @@ from django.shortcuts import render
 from mysite.models import Post #
 from django.http import HttpResponse #
 from datetime import datetime
+from django.shortcuts import redirect
 # Create your views here.
 def homepage(request):
     posts=Post.objects.all()
     now=datetime.now()
-    return render(request,'index.html',locals())
+    return render(request,'index.html',locals()) #locals()傳給
+
 def showpost(requet,slug):
-    post=Post.objects.get(slug=slug)
+    try:
+        post=Post.objects.get(slug=slug)
+        if post != None:
+            return render(requet,'post.html',locals())
+        else:
+            return redirect("/")
+    except :
+        return redirect("/")
     #select*from post where slug=%slug
-    return render(requet,'post.html',locals())
+    
   
 '''
 def homepage(request): #收一個   
