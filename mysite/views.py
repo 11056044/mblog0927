@@ -10,14 +10,9 @@ def homepage(request):
     return render(request,'index.html',locals()) #locals()傳給
 
 def showpost(requet,slug):
-    try:
-        post=Post.objects.get(slug=slug)
-        if post != None:
-            return render(requet,'post.html',locals())
-        else:
-            return redirect("/")
-    except :
-        return redirect("/")
+    post=Post.objects.get(slug=slug)
+    if post != None:
+        return render(requet,'post.html',locals())
     #select*from post where slug=%slug
     
   
