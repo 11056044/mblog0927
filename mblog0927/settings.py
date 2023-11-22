@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mysite'#新增的
+    'django.contrib.humanize',
+    'mysite'#新增的app
 ]
 
 MIDDLEWARE = [
