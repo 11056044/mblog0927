@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from mysite.models import Post #
+from mysite.models import Post, Comment#
 from django.http import HttpResponse #
 from datetime import datetime
 from django.shortcuts import redirect
@@ -11,12 +11,21 @@ def homepage(request):
     print(f'hour={hour}') #不一定要用
     return render(request,'index.html',locals()) #locals()傳給
 
-def showpost(requet,slug):
+def show_all_posts(request):
+    posts=Post.objects.all()
+    return render(request,'allposts.html',locals())
+
+def showpost(request,slug):
     post=Post.objects.get(slug=slug)
     if post != None:
-        return render(requet,'post.html',locals())
+        return render(request,'post.html',locals())
     #select*from post where slug=%slug
-       
+
+def show_comments(request,post_id):
+    #comments=Comment.objects.filter(post=post_id)
+    comments=Post.objects.get(id=post_id).comment_set.all()#動態產生
+    return render(request,'comments.html',locals())
+    
 import random   
 def about(request, num=-1):
     quotes = ['今日事，今日畢',
