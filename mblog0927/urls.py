@@ -29,4 +29,5 @@ urlpatterns = [
     path('post/<int:yr>/<int:mon>/<int:day>/<int:post_num>/',mv.Post,name='post-url'),
     path('carlist/', mv.carlist),
     path('carlist/<int:maker>/', mv.carlist, name='carlist-url'),
+    path('post_new/', mv.new_post, name="post-new"),
 ]              #<>會變成變數傳給slug

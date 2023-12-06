@@ -16,7 +16,7 @@ def show_all_posts(request):
     return render(request,'allposts.html',locals())
 
 def showpost(request,slug):
-    post=Post.objects.get(slug=slug)
+    post = Post.objects.get(slug=slug)
     if post != None:
         return render(request,'post.html',locals())
     #select*from post where slug=%slug
@@ -55,7 +55,7 @@ def carlist(request, maker=0):
     maker_name =  car_maker[maker]
     cars = car_list[maker]
     return render(request, 'carlist.html', locals())
-
+    
 '''
 def homepage(request): #收一個   
     posts=Post.objects.all() #select*from post
@@ -64,3 +64,24 @@ def homepage(request): #收一個
         post_lists.append(f'No. {counter}-{post} <br>') #格式化字串 br:網頁上的換行
     return HttpResponse(post_lists)
 '''
+
+def new_post(request):
+    print(f'form method: {request.method}')
+    if request.method == 'GET':
+        return render(request, 'myform_1.html', locals())
+    elif request.method == 'POST':
+        title = request.POST['title']
+        slug = request.POST['slug']
+        content = request.POST['content']
+        post = Post(title=title, slug=slug, body=content)
+        post.save()
+        return render(request, 'myform_1.html', locals())   
+    '''
+    try:
+            username=request.GET['user_id']
+            password=request.GET['password']
+            print(f'username:{username},password:{password}')
+            return render(request, 'myfrom_1.html', locals())
+        except:
+            return render(request, 'myfrom_1.html', locals())
+    '''    
